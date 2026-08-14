@@ -1,7 +1,8 @@
-package com.josbar.medisistemas.api.mapper;
+package com.josbar.medisistemas.api.mappers;
 
-public interface Mapper<A, B> {
-    B mapTo(A a);
+public interface Mapper<Entity, Request, Response> {
 
-    A mapFrom(B b);
+    Entity toEntity(Request request);
+
+    Response toResponse(Entity entity);
 }
