@@ -1,4 +1,4 @@
-package com.josbar.medisistemas.api.domain;
+package com.josbar.medisistemas.api.domain.entities;
 
 import jakarta.persistence.*;
 
