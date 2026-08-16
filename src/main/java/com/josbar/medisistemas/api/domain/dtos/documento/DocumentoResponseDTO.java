@@ -17,7 +17,7 @@ public class DocumentoResponseDTO {
 
     private Integer idPaciente;
 
-    private CatalogoResponseDTO catalogoResponseDTO;
+    private CatalogoResponseDTO categoriaDocumentoResponseDTO;
 
     private String nombre;
     private String url;

@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ExpedienteClinicoRespondeDTO {
+public class ExpedienteClinicoResponseDTO {
     private PacienteResponseDTO pacienteResponseDTO;
 
     private List<ConsultaResponseDTO> historialConsultasResponseDTO;

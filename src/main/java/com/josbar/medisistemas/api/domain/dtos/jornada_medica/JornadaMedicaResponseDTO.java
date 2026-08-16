@@ -16,7 +16,7 @@ public class JornadaMedicaResponseDTO {
 
     private Integer id;
 
-    private CatalogoResponseDTO diaSemana;
+    private CatalogoResponseDTO diaSemanaResponseDTO;
 
     private LocalTime horaInicio;
     private LocalTime horaFin;

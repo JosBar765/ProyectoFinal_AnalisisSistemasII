@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AuditoriaConsultaRespondeDTO {
+public class AuditoriaConsultaResponseDTO {
     private Integer id;
 
     private Integer idConsulta;
