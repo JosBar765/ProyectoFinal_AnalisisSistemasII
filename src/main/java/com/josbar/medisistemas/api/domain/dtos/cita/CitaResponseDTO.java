@@ -17,9 +17,12 @@ import java.time.LocalTime;
 @Builder
 public class CitaResponseDTO {
     private Integer id;
-    private MedicoResponseDTO medicoDTO;
-    private PacienteResponseDTO pacienteDTO;
-    private CatalogoResponseDTO estadoCitaDTO;
+
+    private MedicoResponseDTO medicoResponseDTO;
+    private PacienteResponseDTO pacienteResponseDTO;
+
+    private CatalogoResponseDTO estadoCitaResponseDTO;
+
     private LocalDate fecha;
     private LocalTime hora;
 }

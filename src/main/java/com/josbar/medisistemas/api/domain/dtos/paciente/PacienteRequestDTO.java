@@ -12,11 +12,17 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class PacienteRequestDTO {
+    private String dpi;
+
     private String primerNombre;
     private String segundoNombre;
     private String primerApellido;
     private String segundoApellido;
-    private LocalDate fechaNacimiento; // Requerido según los índices de tu BD
+
+    private LocalDate fechaNacimiento;
+
     private String telefono;
     private String correo;
+
+    private Boolean estado;
 }

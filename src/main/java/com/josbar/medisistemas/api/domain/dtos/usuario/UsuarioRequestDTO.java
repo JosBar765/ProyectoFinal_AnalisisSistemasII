@@ -11,12 +11,15 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UsuarioRequestDTO {
     private Integer idRol;
+
     private String primerNombre;
     private String segundoNombre;
     private String primerApellido;
     private String segundoApellido;
+
     private String correo;
     private String telefono;
     private String contrasenia;
+
     private Boolean estado; // true para activo, false para inactivo
 }

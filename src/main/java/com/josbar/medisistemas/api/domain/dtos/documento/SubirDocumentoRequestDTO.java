@@ -1,4 +1,4 @@
-package com.josbar.medisistemas.api.domain.dtos.documentos;
+package com.josbar.medisistemas.api.domain.dtos.documento;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

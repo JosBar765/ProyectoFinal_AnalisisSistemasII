@@ -13,11 +13,18 @@ import java.time.LocalDate;
 @Builder
 public class PacienteResponseDTO {
     private Integer id;
+
+    private String dpi;
+
     private String primerNombre;
     private String segundoNombre;
     private String primerApellido;
     private String segundoApellido;
+
     private LocalDate fechaNacimiento;
+
     private String telefono;
     private String correo;
+
+    private Boolean estado;
 }

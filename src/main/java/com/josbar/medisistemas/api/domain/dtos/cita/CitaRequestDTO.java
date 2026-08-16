@@ -15,7 +15,7 @@ import java.time.LocalTime;
 public class CitaRequestDTO {
     private Integer idMedico;
     private Integer idPaciente;
+
     private LocalDate fecha;
     private LocalTime hora;
-    // Nota: El estado se asume "En espera" por defecto en el servicio, no en el Request.
 }

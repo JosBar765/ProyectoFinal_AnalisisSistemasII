@@ -13,7 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MedicoResponseDTO {
     private Integer id;
+
     private UsuarioResponseDTO usuarioDTO;
     private CatalogoResponseDTO especialidadDTO;
+
     private String colegiado;
 }

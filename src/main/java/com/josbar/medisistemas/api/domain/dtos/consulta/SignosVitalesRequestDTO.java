@@ -1,4 +1,4 @@
-package com.josbar.medisistemas.api.domain.dtos.signos_vitales;
+package com.josbar.medisistemas.api.domain.dtos.consulta;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

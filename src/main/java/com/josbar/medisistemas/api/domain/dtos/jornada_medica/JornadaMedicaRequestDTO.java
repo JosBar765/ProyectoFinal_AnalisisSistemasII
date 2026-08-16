@@ -14,7 +14,9 @@ import java.time.LocalTime;
 public class JornadaMedicaRequestDTO {
     private Integer idMedico;
     private Integer idDiaSemana;
+
     private LocalTime horaInicio;
     private LocalTime horaFin;
+
     private Integer duracionConsulta;
 }

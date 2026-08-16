@@ -1,5 +1,6 @@
 package com.josbar.medisistemas.api.domain.dtos.usuario;
 
+import com.josbar.medisistemas.api.domain.dtos.catalogo.CatalogoResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,13 +14,17 @@ import java.time.LocalDateTime;
 @Builder
 public class UsuarioResponseDTO {
     private Integer id;
-    private Integer idRol;
+
     private String primerNombre;
     private String segundoNombre;
     private String primerApellido;
     private String segundoApellido;
+
     private String correo;
     private String telefono;
+
     private Boolean estado;
     private LocalDateTime fechaCreacion;
+
+    private CatalogoResponseDTO rol;
 }

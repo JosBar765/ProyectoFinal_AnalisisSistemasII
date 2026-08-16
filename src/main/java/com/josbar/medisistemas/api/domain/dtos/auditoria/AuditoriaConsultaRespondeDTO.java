@@ -1,4 +1,4 @@
-package com.josbar.medisistemas.api.domain.dtos.auditoria_consulta;
+package com.josbar.medisistemas.api.domain.dtos.auditoria;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

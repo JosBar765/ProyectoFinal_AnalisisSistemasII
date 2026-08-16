@@ -1,6 +1,5 @@
 package com.josbar.medisistemas.api.domain.dtos.consulta;
 
-import com.josbar.medisistemas.api.domain.dtos.signos_vitales.SignosVitalesRequestDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +11,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ConsultaResponseDTO {
     private Integer id;
+
     private Integer idCita;
+
     private String motivoConsulta;
     private String diagnostico;
     private String tratamiento;
     private String observaciones;
-    private SignosVitalesRequestDTO signosVitalesDTO;
+
+    private SignosVitalesRequestDTO signosVitalesRequestDTO;
 }
