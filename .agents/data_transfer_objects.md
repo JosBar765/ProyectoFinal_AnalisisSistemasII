@@ -29,7 +29,7 @@ Datos maestros del sistema (Roles, Estados, Categorías, Días).
 | Objeto | Tipo | Propiedades |
 | :--- | :--- | :--- |
 | `UsuarioRequestDTO` | Request | `idRol` (Integer), `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `correo`, `telefono`, `contrasenia` (Strings), `estado` (Boolean) |
-| `UsuarioResponseDTO` | Response | `id` (Integer), nombres/apellidos, `correo`, `telefono`, `estado`, `fechaCreacion` (LocalDateTime), `rol` (CatalogoResponseDTO) |
+| `UsuarioResponseDTO` | Response | `id` (Integer), `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `correo`, `telefono` (Strings), `estado` (Boolean), `fechaCreacion` (LocalDateTime), `rol` (CatalogoResponseDTO) |
 
 ---
 
@@ -37,10 +37,10 @@ Datos maestros del sistema (Roles, Estados, Categorías, Días).
 
 | Objeto | Tipo | Propiedades |
 | :--- | :--- | :--- |
-| `MedicoRequestDTO` | Request | `idUsuario` (Integer), `idEspecialidad` (Integer), `colegiado` (String) |
-| `MedicoResponseDTO` | Response | `id` (Integer), `usuario` (UsuarioResponseDTO), `especialidad` (CatalogoResponseDTO), `colegiado` (String) |
+| `MedicoRequestDTO` | Request | `idUsuario`, `idEspecialidad` (Integers), `colegiado` (String) |
+| `MedicoResponseDTO` | Response | `id` (Integer), `usuarioResponseDTO` (UsuarioResponseDTO), `especialidadResponseDTO` (CatalogoResponseDTO), `colegiado` (String) |
 | `JornadaMedicaRequestDTO` | Request | `idMedico`, `idDiaSemana`, `duracionConsulta` (Integers), `horaInicio`, `horaFin` (LocalTime) |
-| `JornadaMedicaResponseDTO`| Response | `id`, `duracionConsulta` (Integers), `diaSemana` (CatalogoResponseDTO), `horaInicio`, `horaFin` (LocalTime) |
+| `JornadaMedicaResponseDTO`| Response | `id`, `duracionConsulta` (Integers), `diaSemanaResponseDTO` (CatalogoResponseDTO), `horaInicio`, `horaFin` (LocalTime) |
 
 ---
 
@@ -48,8 +48,8 @@ Datos maestros del sistema (Roles, Estados, Categorías, Días).
 
 | Objeto | Tipo | Propiedades |
 | :--- | :--- | :--- |
-| `PacienteRequestDTO` | Request | `dpi`, nombres/apellidos, `telefono`, `direccion` (Strings), `fechaNacimiento` (LocalDate), `estado` (Boolean) |
-| `PacienteResponseDTO` | Response | `id` (Integer), `dpi`, nombres/apellidos, `telefono`, `direccion`, `fechaNacimiento`, `estado` |
+| `PacienteRequestDTO` | Request | `dpi`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `telefono`, `correo`, `direccion` (Strings), `fechaNacimiento` (LocalDate), `estado` (Boolean) |
+| `PacienteResponseDTO` | Response | `id` (Integer), `dpi`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, `telefono`, `correo`, `direccion` (Strings), `fechaNacimiento` (LocalDate), `estado` (Boolean) |
 
 ---
 
@@ -58,7 +58,7 @@ Datos maestros del sistema (Roles, Estados, Categorías, Días).
 | Objeto | Tipo | Propiedades / Notas |
 | :--- | :--- | :--- |
 | `CitaRequestDTO` | Request | `idMedico`, `idPaciente` (Integers), `fecha` (LocalDate), `hora` (LocalTime) |
-| `CitaResponseDTO` | Response | `id` (Integer), `medico` (MedicoResponseDTO), `paciente` (PacienteResponseDTO), `estadoCita` (CatalogoResponseDTO), `fecha`, `hora` |
+| `CitaResponseDTO` | Response | `id` (Integer), `medicoResponseDTO` (MedicoResponseDTO), `pacienteResponseDTO` (PacienteResponseDTO), `estadoCitaResponseDTO` (CatalogoResponseDTO), `fecha` (LocalDate), `hora` (LocalTime) |
 | `HorarioDisponibleResponseDTO` | Response | `hora` (LocalTime). *Calculado dinámicamente según jornada, duración y citas existentes.* |
 
 ---
@@ -67,10 +67,10 @@ Datos maestros del sistema (Roles, Estados, Categorías, Días).
 
 | Objeto | Tipo | Propiedades |
 | :--- | :--- | :--- |
-| `SignosVitalesDTO` | Ambos | `peso`, `altura`, `temperatura` (BigDecimal), `presionSistolica`, `presionDiastolica` (Integer) |
-| `RegistrarConsultaRequestDTO`| Request | `idCita` (Integer), `motivoConsulta`, `diagnostico`, `tratamiento`, `observaciones` (Strings), `signosVitales` (SignosVitalesDTO) |
-| `ModificarConsultaRequestDTO`| Request | `idMotivoModificacion` (Integer), `motivoConsulta`, `diagnostico`, `tratamiento`, `observaciones` (Strings). *ID va en URL, Médico en JWT.* |
-| `ConsultaResponseDTO` | Response | `id`, `idCita` (Integers), textos clínicos, `signosVitales` (SignosVitalesDTO) |
+| `SignosVitalesRequestDTO` | Ambos | `peso`, `altura`, `temperatura` (BigDecimal), `presionSistolica`, `presionDiastolica` (Integer) |
+| `RegistrarConsultaRequestDTO`| Request | `idCita` (Integer), `motivoConsulta`, `diagnostico`, `tratamiento`, `observaciones` (Strings), `signosVitalesRequestDTO` (SignosVitalesRequestDTO) |
+| `ModificarConsultaRequestDTO`| Request | `idMotivoModificacionConsulta` (Integer), `motivoConsulta`, `diagnostico`, `tratamiento`, `observaciones` (Strings). *ID va en URL, Médico en JWT.* |
+| `ConsultaResponseDTO` | Response | `id`, `idCita` (Integers), `motivoConsulta`, `diagnostico`, `tratamiento`, `observaciones` (Strings), `signosVitalesRequestDTO` (SignosVitalesRequestDTO) |
 
 ---
 
@@ -80,7 +80,7 @@ Datos maestros del sistema (Roles, Estados, Categorías, Días).
 | :--- | :--- | :--- |
 | `SubirDocumentoRequestDTO` | Request | `idPaciente`, `idCategoriaDocumento` (Integers), `nombre`, `url` (Strings). *Secretaria ID extraído de JWT.* |
 | `ActualizarDocumentoRequestDTO`| Request | `idMotivoModificacion` (Integer), `nombre`, `url` (Strings). *ID Documento va en URL.* |
-| `DocumentoResponseDTO` | Response | `id`, `idPaciente`, `idUsuarioCarga` (Integers), `categoria` (CatalogoResponseDTO), `nombre`, `url`, `fechaCarga` (LocalDateTime) |
+| `DocumentoResponseDTO` | Response | `id`, `idPaciente`, `idUsuarioCarga` (Integers), `categoriaDocumentoResponseDTO` (CatalogoResponseDTO), `nombre`, `url` (Strings), `fechaCarga` (LocalDateTime) |
 
 ---
 
@@ -90,7 +90,7 @@ Representan agrupaciones lógicas de información para las interfaces del fronte
 
 | Objeto | Tipo | Propiedades |
 | :--- | :--- | :--- |
-| `ExpedienteClinicoResponseDTO`| Response | `paciente` (PacienteResponseDTO), `historialConsultas` (Lista de ConsultaResponseDTO), `documentosClinicos` (Lista de DocumentoResponseDTO) |
+| `ExpedienteClinicoResponseDTO`| Response | `pacienteResponseDTO` (PacienteResponseDTO), `historialConsultasResponseDTO` (Lista de ConsultaResponseDTO), `documentosClinicosResponseDTO` (Lista de DocumentoResponseDTO) |
 | `ConsultaPorMedicoDTO` | Response | `idMedico` (Integer), `nombreMedico` (String), `cantidad` (Long). *Diseñado plano para fácil mapeo en Angular.* |
 | `DashboardResponseDTO` | Response | `pacientesRegistrados`, `consultasRealizadas`, `citasCanceladas` (Long), `consultasPorMedico` (Lista de ConsultaPorMedicoDTO) |
 
@@ -102,5 +102,5 @@ Registros históricos inmutables generados automáticamente por el sistema tras 
 
 | Objeto | Tipo | Propiedades Generales |
 | :--- | :--- | :--- |
-| `AuditoriaDocumentoResponseDTO` | Response | `id`, `idDocumento`, `idUsuario`, `idMotivoModificacion`, campos anteriores y nuevos, `fechaModificacion` |
-| `AuditoriaConsultaResponseDTO` | Response | `id`, `idConsulta`, `idUsuario`, `idMotivoModificacion`, textos clínicos anteriores y nuevos, `fechaModificacion` |
+| `AuditoriaDocumentoResponseDTO` | Response | `id`, `idDocumento`, `idUsuario`, `idMotivoModificacionDocumento` (Integers), `nombreAnterior`, `urlAnterior`, `nombreNuevo`, `urlNuevo` (Strings), `fechaModificacion` (LocalDateTime) |
+| `AuditoriaConsultaResponseDTO` | Response | `id`, `idConsulta`, `idUsuario`, `idMotivoModificacion` (Integers), `motivoConsultaAnterior`, `diagnosticoAnterior`, `tratamientoAnterior`, `observacionesAnterior`, `motivoConsultaNuevo`, `diagnosticoNuevo`, `tratamientoNuevo`, `observacionesNuevo` (Strings), `fechaModificacion` (LocalDateTime) |
