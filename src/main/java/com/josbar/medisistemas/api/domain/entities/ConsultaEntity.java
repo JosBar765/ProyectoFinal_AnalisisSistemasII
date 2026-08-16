@@ -1,7 +1,15 @@
 package com.josbar.medisistemas.api.domain.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "\"Consulta\"")
 public class ConsultaEntity {
@@ -25,6 +33,11 @@ public class ConsultaEntity {
 
     @Column
     private String observaciones;
+
+    // Dentro de ConsultaEntity.java
+    @OneToOne(mappedBy = "consultaEntity", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private SignosVitalesEntity signosVitalesEntity;
 
     // Getters y setters
 }
