@@ -52,6 +52,7 @@ CREATE TABLE "Paciente" (
   "segundo_apellido" varchar(50) NOT NULL,
   "fecha_nacimiento" date NOT NULL,
   "telefono" varchar(15) NOT NULL,
+  "correo" varchar(255) NOT NULL,
   "direccion" varchar(250) NOT NULL
 );
 
@@ -190,7 +191,7 @@ ALTER TABLE "Medico" ADD CONSTRAINT "FK_Medico_Especialidad" FOREIGN KEY ("id_es
 
 ALTER TABLE "JornadaMedica" ADD CONSTRAINT "FK_JornadaMedica_Medico" FOREIGN KEY ("id_medico") REFERENCES "Medico" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
-ALTER TABLE "JornadaMedica" ADD CONSTRAINT "FK_JornadaMedico_DiaSemana" FOREIGN KEY ("id_dia_semana") REFERENCES "DiaSemana" ("id") DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE "JornadaMedica" ADD CONSTRAINT "FK_JornadaMedica_DiaSemana" FOREIGN KEY ("id_dia_semana") REFERENCES "DiaSemana" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "Cita" ADD CONSTRAINT "FK_Cita_Paciente" FOREIGN KEY ("id_paciente") REFERENCES "Paciente" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 

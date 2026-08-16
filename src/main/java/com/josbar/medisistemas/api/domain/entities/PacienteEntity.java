@@ -44,6 +44,9 @@ public class PacienteEntity {
     @Column(length = 15, nullable = false)
     private String telefono;
 
+    @Column(length = 255, nullable = false)
+    private String correo;
+
     @Column(length = 250, nullable = false)
     private String direccion;
 }
