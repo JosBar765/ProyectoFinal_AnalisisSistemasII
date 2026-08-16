@@ -1,6 +1,7 @@
 package com.josbar.medisistemas.api.mappers.impl;
 
 import com.josbar.medisistemas.api.domain.dtos.consulta.ConsultaResponseDTO;
+import com.josbar.medisistemas.api.domain.dtos.consulta.ModificarConsultaRequestDTO;
 import com.josbar.medisistemas.api.domain.dtos.consulta.RegistrarConsultaRequestDTO;
 import com.josbar.medisistemas.api.domain.dtos.consulta.SignosVitalesRequestDTO;
 import com.josbar.medisistemas.api.domain.entities.CitaEntity;
@@ -63,5 +64,29 @@ public class ConsultaMapper implements Mapper<ConsultaEntity, RegistrarConsultaR
             dto.setSignosVitalesRequestDTO(svDto);
         }
         return dto;
+    }
+
+    /**
+     * Actualiza una entidad Consulta existente con los datos proporcionados en el DTO.
+     * Solo se actualizan los campos que no vengan nulos en la petición.
+     */
+    public void updateEntity(ModificarConsultaRequestDTO request, ConsultaEntity entity) {
+        if (request == null || entity == null) { return; }
+
+        if (request.getMotivoConsulta() != null) {
+            entity.setMotivoConsulta(request.getMotivoConsulta());
+        }
+
+        if (request.getDiagnostico() != null) {
+            entity.setDiagnostico(request.getDiagnostico());
+        }
+
+        if (request.getTratamiento() != null) {
+            entity.setTratamiento(request.getTratamiento());
+        }
+
+        if (request.getObservaciones() != null) {
+            entity.setObservaciones(request.getObservaciones());
+        }
     }
 }
