@@ -14,7 +14,9 @@ import java.math.BigDecimal;
 public class SignosVitalesRequestDTO {
     private BigDecimal peso; // en KG
     private BigDecimal altura; // en CM
+
     private Integer presionSistolica;
     private Integer presionDiastolica;
+
     private BigDecimal temperatura;
 }
