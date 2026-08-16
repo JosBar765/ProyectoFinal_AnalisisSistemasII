@@ -1,4 +1,67 @@
 package com.josbar.medisistemas.api.mappers.impl;
 
-public class ConsultaMapper {
+import com.josbar.medisistemas.api.domain.dtos.consulta.ConsultaResponseDTO;
+import com.josbar.medisistemas.api.domain.dtos.consulta.RegistrarConsultaRequestDTO;
+import com.josbar.medisistemas.api.domain.dtos.consulta.SignosVitalesRequestDTO;
+import com.josbar.medisistemas.api.domain.entities.CitaEntity;
+import com.josbar.medisistemas.api.domain.entities.ConsultaEntity;
+import com.josbar.medisistemas.api.domain.entities.SignosVitalesEntity;
+import com.josbar.medisistemas.api.mappers.Mapper;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ConsultaMapper implements Mapper<ConsultaEntity, RegistrarConsultaRequestDTO, ConsultaResponseDTO> {
+
+    @Override
+    public ConsultaEntity toEntity(RegistrarConsultaRequestDTO request) {
+        if(request == null) return null;
+        ConsultaEntity entity = new ConsultaEntity();
+
+        CitaEntity cita = new CitaEntity();
+        cita.setId(request.getIdCita());
+        entity.setCitaEntity(cita);
+
+        entity.setMotivoConsulta(request.getMotivoConsulta());
+        entity.setDiagnostico(request.getDiagnostico());
+        entity.setTratamiento(request.getTratamiento());
+        entity.setObservaciones(request.getObservaciones());
+
+        if (request.getSignosVitalesRequestDTO() != null) {
+            SignosVitalesEntity sv = new SignosVitalesEntity();
+            sv.setPeso(request.getSignosVitalesRequestDTO().getPeso());
+            sv.setAltura(request.getSignosVitalesRequestDTO().getAltura());
+            sv.setPresionSistolica(request.getSignosVitalesRequestDTO().getPresionSistolica());
+            sv.setPresionDiastolica(request.getSignosVitalesRequestDTO().getPresionDiastolica());
+            sv.setTemperatura(request.getSignosVitalesRequestDTO().getTemperatura());
+
+            // ¡LA SOLUCIÓN AL ERROR LÓGICO ESTÁ AQUÍ!
+            sv.setConsultaEntity(entity); // 1. Los Signos Vitales conocen a su Consulta
+            entity.setSignosVitalesEntity(sv); // 2. La Consulta conoce a sus Signos Vitales
+        }
+        return entity;
+    }
+
+    @Override
+    public ConsultaResponseDTO toResponse(ConsultaEntity entity) {
+        if(entity == null) return null;
+        ConsultaResponseDTO dto = new ConsultaResponseDTO();
+        dto.setId(entity.getId());
+        dto.setIdCita(entity.getCitaEntity() != null ? entity.getCitaEntity().getId() : null);
+        dto.setMotivoConsulta(entity.getMotivoConsulta());
+        dto.setDiagnostico(entity.getDiagnostico());
+        dto.setTratamiento(entity.getTratamiento());
+        dto.setObservaciones(entity.getObservaciones());
+
+        // Como ya hay bidireccionalidad, extraerlos para la respuesta es súper directo:
+        if (entity.getSignosVitalesEntity() != null) {
+            SignosVitalesRequestDTO svDto = new SignosVitalesRequestDTO();
+            svDto.setPeso(entity.getSignosVitalesEntity().getPeso());
+            svDto.setAltura(entity.getSignosVitalesEntity().getAltura());
+            svDto.setPresionSistolica(entity.getSignosVitalesEntity().getPresionSistolica());
+            svDto.setPresionDiastolica(entity.getSignosVitalesEntity().getPresionDiastolica());
+            svDto.setTemperatura(entity.getSignosVitalesEntity().getTemperatura());
+            dto.setSignosVitalesRequestDTO(svDto);
+        }
+        return dto;
+    }
 }

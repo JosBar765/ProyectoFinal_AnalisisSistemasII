@@ -1,4 +1,36 @@
 package com.josbar.medisistemas.api.mappers.impl;
 
-public class AuditoriaDocumentoMapper {
+import com.josbar.medisistemas.api.domain.dtos.auditoria.AuditoriaDocumentoResponseDTO;
+import com.josbar.medisistemas.api.domain.entities.AuditoriaDocumentoEntity;
+import com.josbar.medisistemas.api.mappers.Mapper;
+import org.springframework.stereotype.Component;
+
+@Component
+public class AuditoriaDocumentoMapper implements Mapper<AuditoriaDocumentoEntity, Void, AuditoriaDocumentoResponseDTO> {
+
+    @Override
+    public AuditoriaDocumentoEntity toEntity(Void request) {
+        throw new UnsupportedOperationException("Las auditorías son inmutables y no se crean desde un Request");
+    }
+
+    @Override
+    public AuditoriaDocumentoResponseDTO toResponse(AuditoriaDocumentoEntity entity) {
+        if(entity == null) return null;
+        AuditoriaDocumentoResponseDTO dto = new AuditoriaDocumentoResponseDTO();
+        dto.setId(entity.getId());
+        dto.setIdDocumento(entity.getDocumentoEntity() != null ? entity.getDocumentoEntity().getId() : null);
+        dto.setIdUsuario(entity.getUsuarioEntity() != null ? entity.getUsuarioEntity().getId() : null);
+        dto.setIdMotivoModificacionDocumento(
+                entity.getMotivoModificacionDocumentoEntity() != null
+                        ? entity.getMotivoModificacionDocumentoEntity().getId()
+                        : null)
+        ;
+
+        dto.setNombreAnterior(entity.getNombreAnterior());
+        dto.setNombreNuevo(entity.getNombreNuevo());
+        dto.setUrlAnterior(entity.getUrlAnterior());
+        dto.setUrlNuevo(entity.getUrlNuevo());
+        dto.setFechaModificacion(entity.getFechaModificacion());
+        return dto;
+    }
 }
