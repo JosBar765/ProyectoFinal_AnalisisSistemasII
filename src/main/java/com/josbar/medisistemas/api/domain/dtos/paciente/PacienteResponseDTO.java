@@ -25,6 +25,7 @@ public class PacienteResponseDTO {
 
     private String telefono;
     private String correo;
+    private String direccion;
 
     private Boolean estado;
 }

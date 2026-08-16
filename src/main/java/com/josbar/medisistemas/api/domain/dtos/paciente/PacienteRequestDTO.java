@@ -23,6 +23,7 @@ public class PacienteRequestDTO {
 
     private String telefono;
     private String correo;
+    private String direccion;
 
     private Boolean estado;
 }
