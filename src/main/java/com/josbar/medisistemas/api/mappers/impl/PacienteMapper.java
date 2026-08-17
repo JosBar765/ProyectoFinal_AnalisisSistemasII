@@ -41,4 +41,17 @@ public class PacienteMapper implements Mapper<PacienteEntity, PacienteRequestDTO
         dto.setEstado(entity.getEstado());
         return dto;
     }
+
+    public void updateEntity(PacienteRequestDTO request, PacienteEntity entity) {
+        if (request == null || entity == null) return;
+
+        if (request.getPrimerNombre() != null) entity.setPrimerNombre(request.getPrimerNombre());
+        if (request.getSegundoNombre() != null) entity.setSegundoNombre(request.getSegundoNombre());
+        if (request.getPrimerApellido() != null) entity.setPrimerApellido(request.getPrimerApellido());
+        if (request.getSegundoApellido() != null) entity.setSegundoApellido(request.getSegundoApellido());
+        if (request.getTelefono() != null) entity.setTelefono(request.getTelefono());
+        if (request.getDireccion() != null) entity.setDireccion(request.getDireccion());
+        if (request.getEstado() != null) entity.setEstado(request.getEstado());
+        // Agrega el correo aquí si decides conservarlo en la base de datos
+    }
 }

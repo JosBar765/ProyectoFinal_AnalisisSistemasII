@@ -1,5 +1,6 @@
 package com.josbar.medisistemas.api.mappers.impl;
 
+import com.josbar.medisistemas.api.domain.dtos.documento.ActualizarDocumentoRequestDTO;
 import com.josbar.medisistemas.api.domain.dtos.documento.DocumentoResponseDTO;
 import com.josbar.medisistemas.api.domain.dtos.documento.SubirDocumentoRequestDTO;
 import com.josbar.medisistemas.api.domain.entities.CategoriaDocumentoEntity;
@@ -47,5 +48,16 @@ public class DocumentoMapper implements Mapper<DocumentoEntity, SubirDocumentoRe
         dto.setFechaCarga(entity.getFechaCarga());
         dto.setCategoriaDocumentoResponseDTO(catalogoMapper.toResponse(entity.getCategoriaDocumentoEntity()));
         return dto;
+    }
+
+    public void updateEntity(ActualizarDocumentoRequestDTO request, DocumentoEntity entity) {
+        if (request == null || entity == null) return;
+
+        if (request.getNombre() != null && !request.getNombre().trim().isEmpty()) {
+            entity.setNombre(request.getNombre());
+        }
+        if (request.getUrl() != null && !request.getUrl().trim().isEmpty()) {
+            entity.setUrl(request.getUrl());
+        }
     }
 }

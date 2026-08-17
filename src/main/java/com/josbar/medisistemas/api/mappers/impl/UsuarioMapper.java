@@ -53,4 +53,24 @@ public class UsuarioMapper implements Mapper<UsuarioEntity, UsuarioRequestDTO, U
         // Contraseña excluida obligatoriamente
         return response;
     }
+
+    public void updateEntity(UsuarioRequestDTO request, UsuarioEntity entity) {
+        if (request == null || entity == null) return;
+
+        if (request.getPrimerNombre() != null) entity.setPrimerNombre(request.getPrimerNombre());
+        if (request.getSegundoNombre() != null) entity.setSegundoNombre(request.getSegundoNombre());
+        if (request.getPrimerApellido() != null) entity.setPrimerApellido(request.getPrimerApellido());
+        if (request.getSegundoApellido() != null) entity.setSegundoApellido(request.getSegundoApellido());
+        if (request.getCorreo() != null) entity.setCorreo(request.getCorreo());
+        if (request.getTelefono() != null) entity.setTelefono(request.getTelefono());
+        if (request.getEstado() != null) entity.setEstado(request.getEstado());
+
+        // El Rol se maneja con cuidado para no instanciar si no viene en el Request
+        if (request.getIdRol() != null) {
+            if (entity.getRolEntity() == null) {
+                entity.setRolEntity(new com.josbar.medisistemas.api.domain.entities.RolEntity());
+            }
+            entity.getRolEntity().setId(request.getIdRol());
+        }
+    }
 }
