@@ -104,3 +104,12 @@ Registros históricos inmutables generados automáticamente por el sistema tras 
 | :--- | :--- | :--- |
 | `AuditoriaDocumentoResponseDTO` | Response | `id`, `idDocumento`, `idUsuario`, `idMotivoModificacionDocumento` (Integers), `nombreAnterior`, `urlAnterior`, `nombreNuevo`, `urlNuevo` (Strings), `fechaModificacion` (LocalDateTime) |
 | `AuditoriaConsultaResponseDTO` | Response | `id`, `idConsulta`, `idUsuario`, `idMotivoModificacion` (Integers), `motivoConsultaAnterior`, `diagnosticoAnterior`, `tratamientoAnterior`, `observacionesAnterior`, `motivoConsultaNuevo`, `diagnosticoNuevo`, `tratamientoNuevo`, `observacionesNuevo` (Strings), `fechaModificacion` (LocalDateTime) |
+
+## Consideraciones de Diseño y Reglas de Negocio
+
+*   **Composición en Responses:** Los objetos `ResponseDTO` no devuelven simplemente IDs de sus relaciones, sino que integran otros `ResponseDTO` completos para proveer información detallada[cite: 1]. Por ejemplo, `CitaResponseDTO` contiene `MedicoResponseDTO`, `PacienteResponseDTO` y un `CatalogoResponseDTO` para el estado[cite: 1].
+*   **Gestión de Catálogos:** Se utiliza un DTO genérico `CatalogoResponseDTO` para unificar la respuesta de tablas de catálogo simples que solo contienen `id` y `nombre` (como Roles, Especialidades, Días de la Semana, Estados de Cita y Categorías de Documentos)[cite: 1].
+*   **Signos Vitales:** Los signos vitales se manejan a través de un DTO específico (`SignosVitalesRequestDTO`) que se anida dentro de las peticiones y respuestas de `Consulta`[cite: 1].
+*   **Expediente Clínico:** Existe un DTO agregador llamado `ExpedienteClinicoResponseDTO` que consolida la información del paciente, su historial de consultas y sus documentos clínicos en una sola estructura[cite: 1].
+*   **Dashboard:** Incluye DTOs estadísticos como `DashboardResponseDTO` que agrupa métricas generales y una lista de `ConsultaPorMedicoDTO`[cite: 1].
+*   **Seguridad:** El `UsuarioResponseDTO` excluye explícitamente la contraseña por motivos de seguridad[cite: 1].
