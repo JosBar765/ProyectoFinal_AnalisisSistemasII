@@ -16,21 +16,36 @@ public class AuditoriaDocumentoMapper implements Mapper<AuditoriaDocumentoEntity
     @Override
     public AuditoriaDocumentoResponseDTO toResponse(AuditoriaDocumentoEntity entity) {
         if(entity == null) return null;
+
         AuditoriaDocumentoResponseDTO dto = new AuditoriaDocumentoResponseDTO();
         dto.setId(entity.getId());
-        dto.setIdDocumento(entity.getDocumentoEntity() != null ? entity.getDocumentoEntity().getId() : null);
-        dto.setIdUsuario(entity.getUsuarioEntity() != null ? entity.getUsuarioEntity().getId() : null);
+
+        // Extracción de IDs de las relaciones (Documento, Usuario, Motivo)
+        dto.setIdDocumento(
+                entity.getDocumentoEntity() != null
+                        ? entity.getDocumentoEntity().getId()
+                        : null
+        );
+        dto.setIdUsuario(
+                entity.getUsuarioEntity() != null
+                        ? entity.getUsuarioEntity().getId()
+                        : null
+        );
         dto.setIdMotivoModificacionDocumento(
                 entity.getMotivoModificacionDocumentoEntity() != null
                         ? entity.getMotivoModificacionDocumentoEntity().getId()
-                        : null)
-        ;
+                        : null
+        );
 
+        // Textos de documentos anteriores y nuevos
         dto.setNombreAnterior(entity.getNombreAnterior());
-        dto.setNombreNuevo(entity.getNombreNuevo());
         dto.setUrlAnterior(entity.getUrlAnterior());
+        dto.setNombreNuevo(entity.getNombreNuevo());
         dto.setUrlNuevo(entity.getUrlNuevo());
+
+        // Fecha de la auditoría
         dto.setFechaModificacion(entity.getFechaModificacion());
+
         return dto;
     }
 }
